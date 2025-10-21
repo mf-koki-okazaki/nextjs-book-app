@@ -1,0 +1,20 @@
+services:
+  next:
+    build:
+      context: ./apps/next
+      dockerfile: ./Dockerfile
+      target: dev-server
+    env_file:
+      - "./apps/next/.env"
+    ports:
+      - "3030:3030"
+    volumes:
+      - ./apps/next:/web
+      - /web/node_modules
+    restart: unless-stopped
+    networks:
+      - web-handson-network
+
+networks:
+  web-handson-network:
+    driver: bridge
