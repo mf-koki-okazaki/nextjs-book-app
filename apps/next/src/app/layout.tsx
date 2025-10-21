@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
 import Header from '@/components/Header';
+import { ThemeRegistry } from "@/components/ThemeRegistory";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,12 +19,6 @@ export const metadata: Metadata = {
   description: "書籍の管理とお気に入り機能を持つアプリ",
 };
 
-const theme = createTheme({
-  palette: {
-    mode: 'light',
-  },
-});
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -36,11 +29,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
+        <ThemeRegistry>
           <Header />
           {children}
-        </ThemeProvider>
+        </ThemeRegistry>
       </body>
     </html>
   );
